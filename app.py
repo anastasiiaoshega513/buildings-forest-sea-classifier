@@ -12,7 +12,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = Path("static/uploads")
 UPLOAD_FOLDER.mkdir(parents=True, exist_ok=True)
 
-MODEL_PATH = "static/model/scene_classifier.keras"
+MODEL_PATH = "model/scene_classifier.keras"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 
