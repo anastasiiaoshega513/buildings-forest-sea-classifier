@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Scene Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Buildings, Forest and Sea Classifier</h1>
+    <main class="page">
+        <section class="card">
+            <div class="badge">CNN Image Classifier</div>
 
-    <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Predict</button>
-    </form>
+            <h1>Buildings, Forest & Sea Classifier</h1>
+
+            <p class="subtitle">
+                Upload an image and the model will predict whether it shows buildings, forest or sea.
+            </p>
+
+            <form action="/predict" method="post" enctype="multipart/form-data" class="upload-form">
+                <label class="file-box">
+                    <span>Choose an image</span>
+                    <input type="file" name="image" accept="image/*" required>
+                </label>
+
+                <button type="submit">Predict Image</button>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
