@@ -21,5 +21,28 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/predict", methods=["POST"])
+def predict():
+    image = request.files.get("image")
+
+    if image is None or image.filename == "":
+        return redirect(url_for("index"))
+
+    file_extension = Path(image.filename).suffix.lower()
+    filename = f"{uuid4()}.{file_extension}"
+    image_path = UPLOAD_FOLDER / filename
+
+    image.save(image_path)
+
+    label, probability = classify(model, str(image_path))
+
+    return render_template(
+        "result.html",
+        label=label,
+        probability=round(probability * 100, 2),
+        image_path=f"uploads/{filename}"
+    )
+
+
 if __name__ == "__main__":
     app.run(debug=True)
